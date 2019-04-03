@@ -1,0 +1,21 @@
+public class qiuhe{
+public static int add(int...array){
+int sum=0;
+int i=0;
+for(i=0 ;i < array.length; i++){
+sum+=array[i];
+}
+return sum;
+}
+public static void main(String[] args){
+int a=add(10,20);
+int b=add(10,20,30);
+int c=add(10,20,30,40);
+int[]array={10,20,30};
+System.out.println(a);
+System.out.println(b);
+System.out.println(c);
+System.out.println(add(array));
+System.out.println(add(new int[]{10,20,30,40}));
+}
+}
