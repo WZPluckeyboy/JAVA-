@@ -1,0 +1,37 @@
+import java.util.Arrays;
+import java.util.Random;
+public class ¶ÑÅÅĞò {
+    public static void  adjust(int[] array,int start,int end){
+        int tmp=array[start];
+        for(int i=2*start+1;i<=end;i=i*2+1){
+            if(i<end &&array[i]<array[i+1]){
+                i++;
+            }
+            if(array[i]>tmp){
+                array[start]=array[i];
+                start=i;
+            }
+            else if(array[i]<tmp){
+                break;
+            }
+        }
+        array[start]=tmp;
+    }
+  public static void heapSort(int[] array){
+        for(int i=(array.length-1-1)/2;i>0;i--){
+            adjust(array,i,array.length-1);
+        }
+        for(int j=0;j<array.length-1;j++){
+            int tmp=array[array.length-1-j];
+            array[array.length-1-j]=array[0];
+            array[0]=tmp;
+            adjust(array,0,array.length-1-1-j);
+        }
+  }
+    public static void main(String[] args) {
+       int[] array={7,9,6,8,25,34,16,28,45,96,21} ;
+       heapSort ( array );
+        System.out.println (Arrays.toString(array) );
+    }
+
+}
