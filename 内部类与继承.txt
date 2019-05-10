@@ -1,0 +1,75 @@
+package Lianxi;
+
+import java.util.Scanner;
+
+class A{            //定义父类,只有名字无年龄
+    private String name;
+    public String setName(String name){
+        this.name=name;
+        return name;
+    }
+}
+class B{            //定义父类B，只有年龄无名字
+    private int age;
+    public int SetAge(int age){
+        this.age=age;
+        return age;
+    }
+}
+class Out{    //定义外部类
+    private String school;
+    private class Int1 extends A{    //定义内部类Int1
+        private int age;
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine ( );
+        public Int1 (int age ){    //内部类构造函数
+            this .age=age;
+        }
+        public int getAge() {
+            return age;
+        }
+
+        public String getName(){
+            return  super.setName (name);  //内部类调用父类（即调用A类）
+
+        }
+    }                       //内部类Int2完
+    private class Int2 extends B{      //定义内部类Int2
+        private String name;
+        Scanner input = new Scanner(System.in);
+        int age= input.nextInt ();
+        public Int2(String name){   //内部类构造函数
+            this.name=name;
+        }
+        public String getName(){
+            return name;
+        }
+        public int getAge(){
+            return super.SetAge (age );   //内部类调用父类（即调用B类）
+        }
+        }       //内部类Int2完
+        public Out(String school){     //外部类构造函数
+        this.school=school;
+        }
+    Scanner input = new Scanner(System.in);
+    int age= input.nextInt ();
+    Scanner scanner = new Scanner(System.in);
+    String name = scanner.nextLine ( );
+         public  String person1() {       //外部类方法
+             Int1 person1 = new Int1 ( age );  //外部类调用内部类  Int1
+            return ("姓名："+person1.getName ()+"  \t"+"年龄："+person1.getAge ()+"  \t"+"学校："+school+"\t");
+         }
+         public String person2(){         //外部类方法
+        Int2 person2=new Int2(name);      //外部类调用内部类  Int1
+        return ("姓名："+person2.getName ()+"  \t"+"年龄："+person2.getAge ()+"  \t"+school+"  \t");
+         }
+}
+public class 内部类与继承 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String school= scanner.nextLine ( );
+        Out people=new Out(school);
+        System.out.println (people.person1 () );
+        System.out.println (people.person2 () );
+    }
+}
