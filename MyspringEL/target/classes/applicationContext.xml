@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="address" class="com.ping.Address">
+    <property name="city" value="guangdong"/>
+    <property name="street" value="#{'dongwan'}"/>
+</bean>
+    <bean id="car" class="com.ping.Car">
+        <property name="brand" value="#{'BMW'}"/>
+        <property name="price" value="310000"/>
+        <property name="tyrperimeter" value="#{(java.lang.Math).PI*10}"/>
+    </bean>
+    <bean id="person" class="com.ping.Person">
+<property name="PName" value="#{'ping'}"/>
+        <property name="city" value="#{address.city}"/>
+        <property name="car" value="{car}"/>
+        <property name="info" value="#{car.price>300000?'richman':'poorman'}"/>
+    </bean>
+</beans>
