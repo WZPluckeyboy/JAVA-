@@ -1,0 +1,27 @@
+springmvc_servlet 里的处理器创建 controller中的handle1，再模拟数据库，存放元素，由jsp
+把视图显示出来，在此过程需要配视图处理器
+以下是配置好的固定格式：
+    <!--处理器适配器-->
+     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+       <!--视图解析器-->
+         <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+             <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+             <property name="prefix" value="/jsps/"/>  //需要自己配置前后缀
+             <property name="suffix" value=".jsp"/>
+         </bean>
+         总控制器再web.xml中：
+         如下：
+ <servlet>
+        <servlet-name>mvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springmvc-servlet.xml</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mvc</servlet-name>
+        <url-pattern>*.action</url-pattern>
+    </servlet-mapping>
+    <!--处理器映射器-->
+        <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
