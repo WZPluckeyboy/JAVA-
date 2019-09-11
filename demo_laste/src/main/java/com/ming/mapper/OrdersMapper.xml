@@ -1,0 +1,39 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ming.mapper.OrdersMapper">
+
+    <!--实现延迟加载-->
+    <resultMap id="orderuserlazyRM" type="com.ming.po.Orders">
+        <!--配置订单信息-->
+        <id column="id" property="id"/>
+        <result column="user_id" property="userid"/>
+        <result column="number" property="number"/>
+        <result column="createtime" property="createtime"/>
+        <result column="note" property="note"/>
+        <!--
+            1:1
+            延迟加载[提高性能]
+        -->
+        <association property="user" javaType="com.ming.po.User"
+                     select="com.ming.mapper.UserMapper.queryUserById" column="user_id">
+
+        </association>
+
+    </resultMap>
+
+    <!--
+        resultType不支持延迟加载，即使你开启了延迟加载的功能也没有用
+        resultMap, association ,Collection   支持延迟加载
+
+     -->
+    <!--实现延迟加载-->
+    <select id="findorderuserlazyload" resultMap="orderuserlazyRM">
+        select * from orders;
+    </select>
+
+
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ming.mapper.UserMapper">
+
+    <!--开启各个mapper级别的缓存-->
+    <!--
+        mybatis的二级缓存存储介质不一定是内存
+    -->
+    <cache/>
+
+
+    <resultMap id="myMap" type="com.ming.po.User">
+        <id column="id" property="userId"/>
+        <result column="username" property="userName"/>
+        <result column="birthday" property="birthday"/>
+        <result column="sex" property="sex"/>
+        <result column="address" property="userAddr"/>
+    </resultMap>
+    <select id="queryUserById" parameterType="int" resultMap="myMap">
+        select * from user where id = #{value};
+    </select>
+
+
+    <select id="updateUserById" parameterType="com.ming.po.User">
+        update user set username=#{userName} where id = #{userId}
+    </select>
+
+
+    <select id="queryUserOrder">
+        select
+            user.username,
+            user.address,
+            orders.number,
+            orders.note
+        from
+            user,
+            orders
+        where
+            orders.user_id = user.id;
+    </select>
+</mapper>
